@@ -11,7 +11,7 @@ class Task(models.Model):
         ("new", "New"),
         ("in_progress", "In Progress"),
         ("completed", "Completed"),
-    ], default='new')
+    ]  , default='new')
     completed = models.BooleanField(default=False)
     create_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
@@ -22,7 +22,17 @@ class Task(models.Model):
     priority = models.ForeignKey(Priority, on_delete=models.SET_NULL, null=True, blank=True)
 
 class Category(models.Model):
-    pass
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted = models.BooleanField(default=False)
 
 class Primary(models.Model):
-    pass
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted = models.BooleanField(default=False)
+
