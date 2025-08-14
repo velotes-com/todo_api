@@ -31,6 +31,7 @@ class Task(models.Model):
         return self.title
 
 class Category(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -42,12 +43,13 @@ class Category(models.Model):
     all_objects = models.Manager()
 
     class Meta:
-        unique_together = ("created_at", "name")
+        unique_together = ("created_by", "name")
 
     def __str__(self):
         return self.name
 
 class Priority(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -58,7 +60,7 @@ class Priority(models.Model):
     all_objects = models.Manager()
 
     class Meta:
-        unique_together = ("created_at", "name")
+        unique_together = ("created_by", "name")
 
     def __str__(self):
-        return self.name
+        return self.name 
